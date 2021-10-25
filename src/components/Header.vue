@@ -1,11 +1,11 @@
 <template>
   <div class="login">
     <div v-if="loggingIn" class="container-loading">
-      <img src="/loading.gif" alt="Loading Icon">
+      <!-- <img src="/loading.gif" alt="Loading Icon"> -->
     </div>
     <p v-if="loginError">{{ loginError }}</p>
     <form @submit.prevent="loginSubmit">
-      <input type="email" placeholder="E-Mail" v-model="email">
+      <input  placeholder="E-Mail" v-model="email">
       <input type="password" placeholder="Password" v-model="password">
       <button type="submit">Login</button>
     </form>

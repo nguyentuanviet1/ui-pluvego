@@ -14,29 +14,63 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "login" */ './views/Login.vue')
     },
     {
-      path: '/users',
-      name: 'users',
+      path: '/user',
+      name: 'user',
       component: () => import(/* webpackChunkName: "about" */ './views/Users.vue')
     },
     {
       path: '*',
       redirect: '/login'
+    },
+    {
+      path: '/contacts',
+      name: 'contacts',
+      component: () => import(/* webpackChunkName: "about" */ './views/contacts/index.vue')
+    },
+    {
+      path: '/alertes',
+      name: 'alertes',
+      component: () => import(/* webpackChunkName: "about" */ './views/alertes/index.vue')
+    },
+    {
+      path: '/assets',
+      name: 'assets',
+      component: () => import(/* webpackChunkName: "about" */ './views/assets/index.vue'),
+    
+      // component: assets,
+      children: [
+        // {
+        //   path: '/assets',
+        //   component: () => import(/* webpackChunkName: "about" */ './views/Users.vue')
+    
+        //   // a meta field
+        // }
+      ]
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
+  
+  console.log(store.state)
+  console.log(store.state.accessToken)
+  console.log(store.state)
   store.dispatch('fetchAccessToken');
-  if (to.fullPath === '/users') {
-    if (!store.state.accessToken) {
-      next('/login');
-    }
-  }
-  if (to.fullPath === '/login') {
-    if (store.state.accessToken) {
-      next('/users');
-    }
-  }
+  // if (to.fullPath === '/user') {
+  //   if (!store.state.accessToken) {
+  //     next('/login');
+  //   }
+  // }
+  // if (to.fullPath === '/login') {
+  //   if (store.state.accessToken) {
+  //     next('/user');
+  //   }
+  // } else {
+  //   if (!store.state.accessToken && to.name === 'Login') {
+  //         next('/login');
+  //       }
+
+  // }
   next();
 });
 
