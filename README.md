@@ -1,6 +1,5 @@
-# vue-protected-routes
+# ui-components
 
-![Demo](demo.gif)
 
 ## Project setup
 ```

@@ -43,18 +43,21 @@ export default new Vuex.Store({
     //   })
     // },
     doLogin({ commit }) {
-      // commit('loginStart');
+      commit('loginStart');
       // this.state.accessToken = 'isLogin';
-      //   commit('loginStop', null);
+        // commit('loginStop', null);
         commit('updateAccessToken', 'isLogin');
-        this.state.accessToken = 'isLogin';
-        router.push('/user');
+        // setTimeout(() => {
+          router.push('/user');
+        // }, 500)
+        // router.push('/user');
     },
     fetchAccessToken({ commit }) {
       commit('updateAccessToken', localStorage.getItem('accessToken'));
     },
     logout({ commit }) {
       localStorage.removeItem('accessToken');
+      commit('loginStop', null);
       commit('logout');
       router.push('/login');
     }

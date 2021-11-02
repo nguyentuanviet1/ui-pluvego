@@ -36,13 +36,13 @@ const router = new Router({
       path: '/assets',
       name: 'assets',
       component: () => import(/* webpackChunkName: "about" */ './views/assets/index.vue'),
-    
+
       // component: assets,
       children: [
         // {
         //   path: '/assets',
         //   component: () => import(/* webpackChunkName: "about" */ './views/Users.vue')
-    
+
         //   // a meta field
         // }
       ]
@@ -51,26 +51,16 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  
   console.log(store.state)
-  console.log(store.state.accessToken)
-  console.log(store.state)
-  store.dispatch('fetchAccessToken');
-  // if (to.fullPath === '/user') {
-  //   if (!store.state.accessToken) {
-  //     next('/login');
-  //   }
-  // }
-  // if (to.fullPath === '/login') {
-  //   if (store.state.accessToken) {
-  //     next('/user');
-  //   }
-  // } else {
-  //   if (!store.state.accessToken && to.name === 'Login') {
-  //         next('/login');
-  //       }
-
-  // }
+  if (to.fullPath === '/login') {
+    if (store.state.accessToken) {
+      next('/user');
+    }
+  } else {
+    if (!store.state.accessToken) {
+      next('/login');
+    }
+  }
   next();
 });
 
